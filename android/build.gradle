@@ -1,33 +1,40 @@
+// build.gradle para el módulo de librería (video_thumbnail)
+
 group 'xyz.justsoft.video_thumbnail'
 version '1.0-SNAPSHOT'
 
 buildscript {
     repositories {
         google()
-        jcenter()
+        jcenter()  // Podrías reemplazar con mavenCentral() si jcenter dejó de funcionar en tu entorno
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        // AGP 7.3.1 (es la que exige namespace)
+        classpath 'com.android.tools.build:gradle:7.3.1'
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        jcenter()  // o mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
+    // Propiedad obligatoria para AGP 7.3+:
+    namespace "xyz.justsoft.video_thumbnail"
+
     compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 16
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     lintOptions {
         disable 'InvalidPackage'
     }
